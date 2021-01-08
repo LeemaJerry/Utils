@@ -3,6 +3,7 @@ normalize <- function(y) {
   if(is.numeric(y))
   {
     x = y
+    #global variable assignment
     scalemin <<- min(x)
     scalemax <<- max(x)
     
@@ -14,4 +15,13 @@ normalize <- function(y) {
     return(val)
   } else return(y)
   
+}
+
+denormalize <- function(x) {
+  if(is.numeric(x)){
+    return((((scalemax-scalemin)*x)+scalemin)/1)
+  }else
+  {
+    return(x)
+  }
 }
