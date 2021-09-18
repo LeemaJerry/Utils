@@ -28,3 +28,16 @@ nff = function(x = NULL, n = NULL,  plot = TRUE, add = FALSE, main = NULL){
   ret = data.frame(time = t, y = Mod(indff)) #transformed df
   return(ret)
 }
+
+
+# Fourier series addition
+
+x = seq(1, (16*60*24))
+x = ts(x, frequency = (60*24))
+xf = fourier(x, K = 5)
+xf_head = cbind.data.frame("time" = seq(1:720), head(xf,720))
+data <- xf_head
+Molten <- melt(data, id.vars = "time")
+library(reshape)
+ggplot(Molten, aes(x = time, y = value, colour = variable)) + geom_line(size = 1) +
+   labs(x="Period", y="Value")
